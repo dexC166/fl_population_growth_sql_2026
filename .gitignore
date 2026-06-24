@@ -1,0 +1,16 @@
+# Raw BEBR download - regenerate the CSVs from this; no need to commit the xlsx
+data/*.xlsx
+data/*.xls
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDE
+.vscode/
+.idea/
+
+# pgAdmin / Postgres scratch
+*.backup
+*.dump
