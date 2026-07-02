@@ -32,7 +32,7 @@ The whole thing takes about 2 minutes.
 
 1. Open the BEBR Population program page: [bebr.ufl.edu/population](https://bebr.ufl.edu/population/)
 2. Click **Population** (left menu)
-3. Click the **Recent Data** link to download the workbook.
+3. Click the **Recent Data** link - it takes you to the release page.
    (Direct page: [bebr.ufl.edu/florida-estimates-of-population-2025](https://bebr.ufl.edu/florida-estimates-of-population-2025/))
 4. Click the **`estimates_2025.xlsx`** link to download the workbook.
 5. Save it into this `data/` folder. (You can delete it later - we only need it to make the two CSVs.)

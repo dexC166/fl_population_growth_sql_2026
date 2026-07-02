@@ -184,6 +184,7 @@ FL_Population_Growth_SQL_2026/
 │   ├── 02_load_data.sql                  # load raw exports into staging, then clean in SQL
 │   ├── 03_analysis_queries.sql           # the 10 questions
 │   └── 04_create_views.sql               # reusable summary view
+├── LICENSE
 └── README.md
 ```
 
@@ -259,6 +260,12 @@ University of Florida, **Bureau of Economic and Business Research (BEBR)** - _Fl
 - This release: [bebr.ufl.edu/florida-estimates-of-population-2025](https://bebr.ufl.edu/florida-estimates-of-population-2025/)
 
 Full download-and-prep instructions are in [`data/README.md`](data/README.md).
+
+---
+
+## License
+
+[MIT](LICENSE) - free to reuse the schema and queries for your own state's data.
 
 ---
 
