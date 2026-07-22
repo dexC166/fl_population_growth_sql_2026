@@ -2,12 +2,12 @@ county,region
 Alachua,North Central
 Baker,Northeast
 Bay,Northwest
-Bradford,North Central
-Brevard,East Central
+Bradford,Northeast
+Brevard,Central East
 Broward,Southeast
 Calhoun,Northwest
 Charlotte,Southwest
-Citrus,North Central
+Citrus,Central West
 Clay,Northeast
 Collier,Southwest
 Columbia,North Central
@@ -17,52 +17,52 @@ Duval,Northeast
 Escambia,Northwest
 Flagler,Northeast
 Franklin,Northwest
-Gadsden,Northwest
+Gadsden,North Central
 Gilchrist,North Central
 Glades,Southwest
 Gulf,Northwest
 Hamilton,North Central
-Hardee,Southwest
+Hardee,Central
 Hendry,Southwest
 Hernando,Central West
-Highlands,Southwest
+Highlands,Central
 Hillsborough,Central West
 Holmes,Northwest
-Indian River,East Central
+Indian River,Central East
 Jackson,Northwest
-Jefferson,Northwest
+Jefferson,North Central
 Lafayette,North Central
 Lake,Central
 Lee,Southwest
-Leon,Northwest
+Leon,North Central
 Levy,North Central
-Liberty,Northwest
-Madison,Northwest
-Manatee,Central West
-Marion,North Central
-Martin,East Central
+Liberty,North Central
+Madison,North Central
+Manatee,Southwest
+Marion,Central
+Martin,Southeast
 Miami-Dade,Southeast
 Monroe,Southeast
 Nassau,Northeast
 Okaloosa,Northwest
-Okeechobee,Southwest
+Okeechobee,Central East
 Orange,Central
 Osceola,Central
 Palm Beach,Southeast
 Pasco,Central West
 Pinellas,Central West
 Polk,Central
-Putnam,North Central
+Putnam,Northeast
 St. Johns,Northeast
-St. Lucie,East Central
+St. Lucie,Central East
 Santa Rosa,Northwest
-Sarasota,Central West
+Sarasota,Southwest
 Seminole,Central
-Sumter,North Central
+Sumter,Central
 Suwannee,North Central
-Taylor,Northwest
+Taylor,North Central
 Union,North Central
-Volusia,Central
-Wakulla,Northwest
+Volusia,Central East
+Wakulla,North Central
 Walton,Northwest
 Washington,Northwest

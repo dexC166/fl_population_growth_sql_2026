@@ -80,8 +80,8 @@ CREATE TABLE staging_region (                       -- already clean (county,reg
 -- =====================================================================
 -- PART 2 - Load the files INTO the staging tables
 -- ---------------------------------------------------------------------
--- Pick ONE of the options below (A, B, or C), the same way the SQL
--- Bootcamp shows importing CSVs. Everything loads WITH (FORMAT csv):
+-- Pick ONE of the options below (A, B, or C).
+-- Everything loads WITH (FORMAT csv):
 --
 --   * The regions file has a header row, so it loads with HEADER true.
 --   * The two BEBR files have NO single header row (they have several

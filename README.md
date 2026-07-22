@@ -100,22 +100,21 @@ Answer:
 
 Answer:
 
-**The Orlando area added the most people; the Northeast grew the fastest.**
+**The Orlando area added the most people; the Southwest grew the fastest.**
 
-- Most people added: **Central (greater Orlando), +461,411**
-- Fastest-growing region: **Northeast, +12.9%**
+- Most people added: **Central (greater Orlando), +508,475**
+- Fastest-growing region: **Southwest, 12.6%** (a hair ahead of Central, also 12.6%)
 - Slowest, despite being the most populous: **Southeast (Miami/Fort Lauderdale/Palm Beach), 3.7%**
 
 #### 7. Which regions have an average county growth rate above 10%?
 
 Answer:
 
-**Four regions clear the 10% bar.**
+**Three regions clear the 10% bar.**
 
-- Northeast: **14.8%**
-- Central: **13.2%**
-- East Central: **10.8%**
-- Central West: **10.5%**
+- Central: **13.4%**
+- Southwest: **12.7%**
+- Northeast: **11.4%**
 
 #### 8. How do all 67 counties sort into growth tiers?
 
@@ -151,22 +150,22 @@ Answer:
 
 ## Skills Demonstrated
 
-| Concept (from the SQL Bootcamp)              | Where I used it                                                             |
-| -------------------------------------------- | --------------------------------------------------------------------------- |
-| **CREATE TABLE / constraints**               | `PRIMARY KEY`, `FOREIGN KEY`, `NOT NULL`, `CHECK` in `01_create_tables.sql` |
-| **Importing CSVs**                           | pgAdmin Import + `\copy` + server-side `COPY` in `02_load_data.sql`         |
-| **Staging tables + data cleaning (ELT)**     | Load raw BEBR exports, then clean in SQL in `02_load_data.sql`              |
+| SQL Concept                                  | Where I used it                                                                 |
+| -------------------------------------------- | ------------------------------------------------------------------------------- |
+| **CREATE TABLE / constraints**               | `PRIMARY KEY`, `FOREIGN KEY`, `NOT NULL`, `CHECK` in `01_create_tables.sql`     |
+| **Importing CSVs**                           | pgAdmin Import + `\copy` + server-side `COPY` in `02_load_data.sql`             |
+| **Staging tables + data cleaning (ELT)**     | Load raw BEBR exports, then clean in SQL in `02_load_data.sql`                  |
 | **String + cast functions**                  | `REPLACE`, `TRIM`, `::INTEGER` to strip separators + cast in `02_load_data.sql` |
-| **SELECT / WHERE / ORDER BY / LIMIT**        | Every query; top-10 lists, filtered county lists                            |
-| **DISTINCT / COUNT / MIN / MAX / SUM / AVG** | Warm-up checks and the statewide totals                                     |
-| **Computed columns + ROUND + decimals**      | Percent-growth math (and the integer-division gotcha)                       |
-| **GROUP BY / HAVING**                        | Regional roll-ups and the "regions above 10%" filter                        |
-| **INNER JOIN / LEFT JOIN (3 tables)**        | Joining population + components + region                                    |
-| **Self-join**                                | Ranking counties by growth (Q10)                                            |
-| **Subqueries**                               | Comparing each county to the statewide rate (Q9)                            |
-| **CASE**                                     | Growth tiers (Q8) and the "growth story" label                              |
-| **UNION ALL**                                | Fastest + shrinking counties in one result                                  |
-| **VIEWS**                                    | `county_growth_summary` in `04_create_views.sql`                            |
+| **SELECT / WHERE / ORDER BY / LIMIT**        | Every query; top-10 lists, filtered county lists                                |
+| **DISTINCT / COUNT / MIN / MAX / SUM / AVG** | Warm-up checks and the statewide totals                                         |
+| **Computed columns + ROUND + decimals**      | Percent-growth math (and the integer-division gotcha)                           |
+| **GROUP BY / HAVING**                        | Regional roll-ups and the "regions above 10%" filter                            |
+| **INNER JOIN / LEFT JOIN (3 tables)**        | Joining population + components + region                                        |
+| **Self-join**                                | Ranking counties by growth (Q10)                                                |
+| **Subqueries**                               | Comparing each county to the statewide rate (Q9)                                |
+| **CASE**                                     | Growth tiers (Q8) and the "growth story" label                                  |
+| **UNION ALL**                                | Fastest + shrinking counties in one result                                      |
+| **VIEWS**                                    | `county_growth_summary` in `04_create_views.sql`                                |
 
 ---
 
@@ -192,14 +191,63 @@ FL_Population_Growth_SQL_2026/
 
 ## Quick Start
 
-You need **PostgreSQL** and **pgAdmin** (both installed together; this is the same setup from the SQL Bootcamp).
+You need **PostgreSQL** installed. For actually _running_ the SQL you have
+three options - the scripts work the same in all of them, so pick whichever
+matches how you like to work:
+
+| Option                         | Tool                                                                                                                                                                          | What it feels like                                                   |
+| ------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------- |
+| **1 - pgAdmin**                | **pgAdmin 4** (ships with the PostgreSQL installer)                                                                                                                           | The classic point-and-click GUI; open each script in the Query Tool |
+| **2 - IDE terminal (`psql`)**  | `psql` in your IDE's integrated terminal (VS Code, Cursor, etc.)                                                                                                              | Pure command line; run scripts with `\i`, load CSVs with `\copy`    |
+| **3 - IDE database extension** | A PostgreSQL extension inside your IDE - **DBCode** (the most pgAdmin-like experience), **PostgreSQL** (by Microsoft), or **SQLTools** (+ its **SQLTools PostgreSQL Driver**) | A pgAdmin-style GUI without ever leaving your editor                |
+
+The only step where the choice matters is the CSV import in
+`sql/02_load_data.sql` - its PART 2 has matching load methods: pgAdmin users
+take **Option A** (the Import/Export dialog), `psql` users take **Option B**
+(`\copy`), and extension users take their extension's own CSV import tool or
+**Option C** (server-side `COPY` with absolute paths).
+
+<details>
+<summary><b>Option 2 in full:</b> the exact <code>psql</code> commands</summary>
+
+Run these from the **project root** (the `\copy` paths in `02_load_data.sql`
+are relative, so the folder you run from matters). Replace `postgres` with
+your username if it's different; each command prompts for your password.
+
+```bash
+# one-time: create the database
+psql -U postgres -c "CREATE DATABASE fl_population;"
+
+# then run the scripts in order
+psql -U postgres -d fl_population -f sql/01_create_tables.sql
+psql -U postgres -d fl_population -f sql/02_load_data.sql
+psql -U postgres -d fl_population -f sql/03_analysis_queries.sql
+psql -U postgres -d fl_population -f sql/04_create_views.sql
+```
+
+> **Before running `02_load_data.sql` this way:** open it and **uncomment the
+> three `\copy` lines under Option B** (PART 2). All three load options ship
+> commented out so the script doesn't assume your import method - if you skip
+> this, the script still runs but loads **0 rows**, and the check at the
+> bottom will show it. `psql` executes `\copy` lines inside a `-f` script just
+> fine.
+
+Note that `-f` runs a whole file top to bottom, so `03_analysis_queries.sql`
+prints all 10 answers in one long scroll - nothing wrong with that, but the
+query-by-query experience is nicer in an interactive session (`psql -U
+postgres -d fl_population`, then paste queries) or in a GUI (Options 1 and 3).
+
+</details>
+
+The steps themselves are the same everywhere:
 
 1. **Get the data.** Follow [`data/README.md`](data/README.md) to download the BEBR
    Excel file and **Save As CSV** two of its tabs into `fl_county_population_raw.csv`
    and `fl_county_components_raw.csv` - no manual cleanup; the SQL does that.
    (`fl_county_regions.csv` is already here.)
-2. **Create a database** in pgAdmin called `fl_population`.
-3. **Run the scripts in order** in the Query Tool:
+2. **Create a database** called `fl_population` (right-click **Databases →
+   Create** in a GUI, or `CREATE DATABASE fl_population;` from `psql`).
+3. **Run the scripts in order** (Query Tool, `psql`, or your extension's SQL editor):
    ```
    sql/01_create_tables.sql      -- build the tables
    sql/02_load_data.sql          -- load the raw exports into staging, then clean in SQL
@@ -216,27 +264,29 @@ You need **PostgreSQL** and **pgAdmin** (both installed together; this is the sa
 
 | Region        | Population 2025 | People added | Growth rate |
 | ------------- | --------------- | ------------ | ----------- |
-| Central       | 4,413,376       | 461,411      | 11.7%       |
-| Central West  | 4,358,273       | 349,282      | 8.7%        |
-| Southeast     | 6,449,330       | 228,123      | 3.7%        |
-| Northeast     | 1,942,891       | 221,665      | 12.9%       |
-| Southwest     | 1,746,386       | 171,038      | 10.9%       |
-| East Central  | 1,401,268       | 147,211      | 11.7%       |
-| North Central | 1,407,953       | 139,271      | 11.0%       |
-| Northwest     | 1,659,784       | 123,073      | 8.0%        |
+| Central       | 4,539,119       | 508,475      | 12.6%       |
+| Southwest     | 2,526,539       | 283,681      | 12.6%       |
+| Central West  | 3,570,288       | 241,170      | 7.2%        |
+| Southeast     | 6,615,611       | 235,973      | 3.7%        |
+| Northeast     | 2,047,159       | 224,309      | 12.3%       |
+| Central East  | 1,879,834       | 191,021      | 11.3%       |
+| Northwest     | 1,206,168       | 101,493      | 9.2%        |
+| North Central | 994,543         | 54,952       | 5.8%        |
 
 **Statewide, 2020-2025:** population grew from **21,538,187** to **23,379,261** (**+1,841,074**, or **8.5%**) - with a natural change of **-101,089** and net migration of **+1,942,163**.
 
-**My home area (Central West region), sorted by growth** (from the `county_growth_summary` view):
+**My home area (Southwest region), sorted by growth** (from the `county_growth_summary` view):
 
-| County       | Population 2025 | People added | Growth | What's driving it          |
-| ------------ | --------------- | ------------ | ------ | -------------------------- |
-| Manatee      | 466,845         | 67,135       | 16.8%  | Growth from migration only |
-| Pasco        | 648,369         | 86,478       | 15.4%  | Growth from migration only |
-| Sarasota     | 487,640         | 53,634       | 12.4%  | Growth from migration only |
-| Hernando     | 212,849         | 18,334       | 9.4%   | Growth from migration only |
-| Hillsborough | 1,575,637       | 115,875      | 7.9%   | Growth from both           |
-| Pinellas     | 966,933         | 7,826        | 0.8%   | Growth from migration only |
+| County    | Population 2025 | People added | Growth | What's driving it          |
+| --------- | --------------- | ------------ | ------ | -------------------------- |
+| Charlotte | 223,430         | 36,583       | 19.6%  | Growth from migration only |
+| Hendry    | 47,085          | 7,466        | 18.8%  | Growth from both           |
+| Manatee   | 466,845         | 67,135       | 16.8%  | Growth from migration only |
+| Sarasota  | 487,640         | 53,634       | 12.4%  | Growth from migration only |
+| Lee       | 839,223         | 78,401       | 10.3%  | Growth from migration only |
+| Collier   | 413,314         | 37,562       | 10.0%  | Growth from migration only |
+| Glades    | 13,055          | 929          | 7.7%   | Growth from migration only |
+| DeSoto    | 35,947          | 1,971        | 5.8%   | Growth from migration only |
 
 ---
 
@@ -246,7 +296,7 @@ The honest fine print:
 
 - **Estimates, not a census.** The 2025 figures are BEBR's official estimates; 2000/2010/2020 are Census counts. Estimates carry some uncertainty, especially for small counties.
 - **Five-year window.** Components of change (births, deaths, migration) cover 2020-2025 combined, not year by year.
-- **Regions are my own grouping.** `fl_county_regions.csv` is a hand-built convenience lookup; Florida's regional lines vary by who's drawing them (see `data/README.md`).
+- **Regions follow VISIT FLORIDA.** `fl_county_regions.csv` assigns each county to one of the eight regions on [VISIT FLORIDA's Places to Go map](https://www.visitflorida.com/places-to-go/), derived from which region their cities are listed under (the exact derivation rules are in `data/README.md`). It's one convention among several - Florida's regional lines vary by who's drawing them - and only the regional roll-ups depend on it; all county-level numbers come straight from BEBR.
 - **Descriptive, not causal.** This shows _where_ and _what kind_ of growth, not _why_ people are choosing specific counties.
 - **Counties only.** BEBR also publishes city-level data; this project stays at the county level to keep the joins clean.
 

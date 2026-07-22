@@ -4,8 +4,8 @@
 -- Run this FIRST. It builds the three tables that hold the BEBR data.
 -- Then run 02_load_data.sql to fill them, then 03 / 04 for the analysis.
 --
--- I learned this in the SQL Bootcamp: design the tables first, give each
--- one a PRIMARY KEY, and use FOREIGN KEYs so the data stays consistent.
+-- Let's design the tables first, give each one a PRIMARY KEY,
+-- and use FOREIGN KEYs so the data stays consistent.
 -- =====================================================================
 
 -- Drop old copies first so I can re-run this whole script any time.
@@ -51,9 +51,10 @@ CREATE TABLE county_components (
 
 -- ---------------------------------------------------------------------
 -- TABLE 3: county_region
--- A small hand-built lookup that puts each county in a broad Florida
--- region. This is NOT a BEBR download (see data/README.md). I made it so
--- I can GROUP BY region and compare parts of the state.
+-- A small lookup that puts each county in one of VISIT FLORIDA's eight
+-- regions, derived from their city map (see data/README.md). This is
+-- NOT a BEBR download. It lets me GROUP BY region and compare parts
+-- of the state.
 -- ---------------------------------------------------------------------
 CREATE TABLE county_region (
     county  VARCHAR(40) PRIMARY KEY

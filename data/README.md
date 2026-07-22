@@ -83,15 +83,40 @@ Again, **no manual cleanup** - leave the file as Excel exports it.
 ## About `fl_county_regions.csv` (already included)
 
 This file is **not** a BEBR download. The BEBR tables list counties but not which
-part of the state they're in, so I hand-built a small lookup that puts each of
-the 67 counties into one of eight broad Florida regions (Northwest, North
-Central, Northeast, Central, Central West, East Central, Southwest, Southeast).
-It lets the SQL `GROUP BY region` to compare different parts of the state.
+part of the state they're in, so this lookup puts each of the 67 counties into
+one of eight broad Florida regions (Northwest, North Central, Northeast,
+Central, Central East, Central West, Southwest, Southeast). It lets the SQL
+`GROUP BY region` to compare different parts of the state.
 
-The groupings are my own reasonable geographic buckets (regional lines in
-Florida vary by who's drawing them), so feel free to adjust them. It's two
-columns - `county` and `region` - and the county names match the BEBR spelling
-exactly (e.g. `St. Johns`, `Miami-Dade`, `DeSoto`) so the join lines up.
+**Where the regions come from:** the assignments are derived from
+[VISIT FLORIDA](https://www.visitflorida.com/places-to-go/) (the state's
+official tourism agency), which divides Florida into these exact eight
+regions. VISIT FLORIDA maps _cities_ rather than counties, so I turned their
+city list into a county list with one simple rule:
+
+1. **A county gets the region of its VISIT FLORIDA cities.** For example,
+   Tampa is listed under Central West, so Hillsborough County is Central West;
+   Tallahassee is listed under North Central, so Leon County is North Central.
+   59 of the 67 counties have at least one city on VISIT FLORIDA's map, and
+   in every one of those counties all of its listed cities agree on the
+   region, so there was no judgment call to make.
+2. **The 8 rural counties with no city on the map** (Baker, Bradford, Calhoun,
+   Gilchrist, Lafayette, Liberty, Union, Washington) get the region shared by
+   the **majority of their neighboring counties** from step 1. Example:
+   Washington County borders Bay, Holmes, Jackson, and Walton - all Northwest -
+   so it's Northwest.
+
+Anyone can re-derive this file from the VISIT FLORIDA page with those two
+rules and get the same 67 assignments - nothing in it is my personal
+preference. Note that this is still just one convention (Florida law, for
+example, defines
+[ten Regional Planning Councils](https://www.flsenate.gov/Laws/Statutes/2025/0186.512)
+with different lines), and it only affects the _regional_ roll-ups (queries
+Q6/Q7 and the `region` column in the summary view) - every county-level
+number comes straight from BEBR. If you prefer different lines, just edit
+this file and re-run `02_load_data.sql`. It's two columns - `county` and
+`region` - and the county names match the BEBR spelling exactly (e.g.
+`St. Johns`, `Miami-Dade`, `DeSoto`) so the join lines up.
 
 ---
 

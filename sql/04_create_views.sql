@@ -52,8 +52,8 @@ FROM county_growth_summary
 GROUP BY growth_story
 ORDER BY county_count DESC;
 
--- My home base: Manatee County and its Central West neighbors.
+-- My home base: Manatee County and its Southwest neighbors.
 SELECT county, pop_2025, people_added, pct_growth, growth_story
 FROM county_growth_summary
-WHERE region = 'Central West'
+WHERE region = 'Southwest'
 ORDER BY pct_growth DESC;

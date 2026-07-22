@@ -9,7 +9,7 @@
 -- MOVING IN (migration)? That answer changes what counties need to plan
 -- for - schools and maternity wards vs. roads, housing, and elder care.
 --
--- A quick note on math I learned in the bootcamp:
+-- A quick note on math I learned in Jose Portilla's SQL bootcamp:
 -- if you divide two INTEGERs, Postgres throws away the decimals
 -- (e.g. 5 / 2 = 2, not 2.5). To get a real percentage I multiply by
 -- 100.0 (a decimal) FIRST, which makes the whole result a decimal.
@@ -126,8 +126,9 @@ ORDER BY net_migration DESC;
 -- =====================================================================
 -- Q6. How does growth compare across Florida's regions?
 --     Concepts: INNER JOIN across all THREE tables, GROUP BY.
---     Answer: Central (Orlando area) added the most people (+461,411);
---             Northeast grew fastest as a region (+12.9%).
+--     Answer: Central (Orlando area) added the most people (+508,475);
+--             Southwest grew fastest as a region (12.6%, a hair ahead
+--             of Central's 12.6%).
 -- =====================================================================
 SELECT
     r.region,
@@ -146,8 +147,7 @@ ORDER BY people_added DESC;
 -- =====================================================================
 -- Q7. Which regions have an AVERAGE county growth rate above 10%?
 --     Concepts: GROUP BY + HAVING (a filter on a group's aggregate).
---     Answer: Northeast (14.8%), Central (13.2%), East Central (10.8%),
---             Central West (10.5%).
+--     Answer: Central (13.4%), Southwest (12.7%), Northeast (11.4%).
 -- =====================================================================
 SELECT
     r.region,
