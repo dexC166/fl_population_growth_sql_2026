@@ -2,7 +2,7 @@
 
 **Where Florida is growing, how fast, and what's actually driving it - births or people moving in - county by county, using SQL.**
 
-I built this as a portfolio project using **PostgreSQL**, real population data from the **UF Bureau of Economic and Business Research (BEBR)** (my alma mater), and a question I care about as a Florida resident: my state is the fastest-growing in the country, so _where_ is everyone going, and _why_?
+I built this as a portfolio project using **PostgreSQL**, real population data from the **UF Bureau of Economic and Business Research (BEBR)** (my alma mater), and a question I care about as a Florida resident: my state has added more people since 2020 than every state but Texas, so _where_ is everyone going, and _why_?
 
 **Source code:** [github.com/dexC166/fl_population_growth_sql_2026](https://github.com/dexC166/fl_population_growth_sql_2026)
 
