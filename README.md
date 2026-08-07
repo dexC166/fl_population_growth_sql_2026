@@ -8,6 +8,18 @@ I built this as a portfolio project using **PostgreSQL**, real population data f
 
 ---
 
+## 📺 Video Walkthrough (3-Part Series)
+
+Prefer watching over reading? I recorded a 3-part walkthrough of this project:
+
+| Part                                                                                          | What it covers                                                                   |
+| --------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
+| [Part 1: Project Overview & Core Insights](https://youtu.be/P1uUKVsu71Y?si=qD7x25clYKimhFHy)  | The headline finding with trends discovered, and the real-world community impact |
+| [Part 2: Repository Architecture & Reproducibility](https://www.youtube.com/@DayleCortes2030) | Repo layout, data setup, and how to re-run it yourself                           |
+| [Part 3: Detailed Code & Pipeline Review](https://www.youtube.com/@DayleCortes2030)           | Line-by-line review of the four SQL scripts                                      |
+
+---
+
 ## The Headline (Plain English)
 
 Between the 2020 Census and April 2025, **Florida added about 1.84 million people** - it grew **8.5%** in five years. But here's the part most people miss:
@@ -195,8 +207,8 @@ You need **PostgreSQL** installed. For actually _running_ the SQL you have
 three options - the scripts work the same in all of them, so pick whichever
 matches how you like to work:
 
-| Option                         | Tool                                                                                                                                                                          | What it feels like                                                   |
-| ------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------- |
+| Option                         | Tool                                                                                                                                                                          | What it feels like                                                  |
+| ------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------- |
 | **1 - pgAdmin**                | **pgAdmin 4** (ships with the PostgreSQL installer)                                                                                                                           | The classic point-and-click GUI; open each script in the Query Tool |
 | **2 - IDE terminal (`psql`)**  | `psql` in your IDE's integrated terminal (VS Code, Cursor, etc.)                                                                                                              | Pure command line; run scripts with `\i`, load CSVs with `\copy`    |
 | **3 - IDE database extension** | A PostgreSQL extension inside your IDE - **DBCode** (the most pgAdmin-like experience), **PostgreSQL** (by Microsoft), or **SQLTools** (+ its **SQLTools PostgreSQL Driver**) | A pgAdmin-style GUI without ever leaving your editor                |
