@@ -186,6 +186,7 @@ Answer:
 ```
 FL_Population_Growth_SQL_2026/
 ├── data/
+│   ├── estimates_2025.xlsx               # main BEBR source workbook (UF Estimates of Population 2025; you download this)
 │   ├── fl_county_regions.csv             # county -> region lookup (included)
 │   ├── fl_county_population_raw.csv      # raw export of BEBR Table 03 (you make this)
 │   ├── fl_county_components_raw.csv      # raw export of BEBR Table 02 (you make this)

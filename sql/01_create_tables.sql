@@ -45,7 +45,7 @@ CREATE TABLE county_components (
     births                 INTEGER NOT NULL,
     deaths                 INTEGER NOT NULL,
     natural_change         INTEGER NOT NULL,   -- births - deaths (may be < 0)
-    net_migration          INTEGER NOT NULL    -- may be < 0
+    net_migration          INTEGER NOT NULL    -- moved in - moved out may be < 0
 );
 
 
