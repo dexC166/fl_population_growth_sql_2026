@@ -27,7 +27,10 @@ CREATE TABLE county_population (
     pop_2020  INTEGER NOT NULL,            -- 2020 Census
     pop_2010  INTEGER NOT NULL,            -- 2010 Census
     pop_2000  INTEGER NOT NULL,            -- 2000 Census
-    CONSTRAINT pop_2025_nonneg CHECK (pop_2025 >= 0)
+    CONSTRAINT pop_2025_nonneg CHECK (pop_2025 >= 0),
+    CONSTRAINT pop_2020_nonneg CHECK (pop_2020 >= 0),
+    CONSTRAINT pop_2010_nonneg CHECK (pop_2010 >= 0),
+    CONSTRAINT pop_2000_nonneg CHECK (pop_2000 >= 0)
 );
 
 
@@ -45,7 +48,9 @@ CREATE TABLE county_components (
     births                 INTEGER NOT NULL,
     deaths                 INTEGER NOT NULL,
     natural_change         INTEGER NOT NULL,   -- births - deaths (may be < 0)
-    net_migration          INTEGER NOT NULL    -- moved in - moved out may be < 0
+    net_migration          INTEGER NOT NULL,   -- moved in - moved out may be < 0
+    CONSTRAINT births_nonneg CHECK (births >= 0),
+    CONSTRAINT deaths_nonneg CHECK (deaths >= 0)
 );
 
 
