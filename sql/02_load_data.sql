@@ -6,9 +6,11 @@
 -- THE IDEA (and why it's different from a normal CSV import):
 -- The BEBR workbook tabs are messy - they have a title line, a couple of
 -- header lines, a "FLORIDA" statewide total, blank separator rows, and a
--- footnote. On top of that, Excel writes the big numbers with thousands
--- separators in quotes, like "298,485". Instead of cleaning all that BY
--- HAND in Excel, I leave the raw file untouched and let SQL do the work.
+-- footnote. On top of that, the workbook's cells are number-formatted with
+-- thousands separators, so when Excel "Save As CSV" writes each cell as
+-- DISPLAYED, the big numbers come out comma-formatted and quoted, like
+-- "298,485". Instead of cleaning all that BY HAND in Excel, I leave the
+-- raw file untouched and let SQL do the work.
 -- That's the real-world "load raw first, then transform" pattern (ELT):
 --
 --   1. Load each raw row, exactly as exported, into a "staging" table.
